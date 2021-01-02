@@ -1,33 +1,41 @@
 package com.mj;
 
+import com.mj.sort.*;
+import com.mj.sort.cmp.*;
+import com.mj.tool.Asserts;
 import com.mj.tool.Integers;
-import com.mj.tool.Times;
 
 import java.util.Arrays;
 
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class Main {
 
     public static void main(String args[]) {
-        Integer[] array1 = Integers.random(10000, 1, 100000);
-        Integer[] array2 = Integers.copy(array1);
-        Integer[] array3 = Integers.copy(array1);
+        Integer[] array = Integers.random(20000, 1, 100000);
 
-        Integer[] array4 = Integers.random(10, 1, 100);
-        Integers.println(array4);
-        selectionSort(array4);
-        Integers.println(array4);
+        testSorts(array,
+                new BubbleSort3(),
+                new SelectionSort(),
+                new HeapSort(),
+                new InsertionSort1(),
+                new InsertionSort2(),
+                new InsertionSort3(),
+                new MergeSort(),
+                new QuickSort(),
+                new ShellSort(),
+                new CountingSort());
+    }
 
-//        Times.test("bubbleSort1", () -> {
-//            bubbleSort1(array1);
-//        });
-//
-//        Times.test("bubbleSort2", () -> {
-//            bubbleSort2(array2);1
-//        });
-//
-//        Times.test("bubbleSort3", () -> {
-//            bubbleSort3(array3);
-//        });
+    static void testSorts(Integer[] array, Sort... sorts) {
+        for (Sort sort : sorts) {
+            Integer[] newArray = Integers.copy(array);
+            sort.sort(newArray);
+            Asserts.test(Integers.isAscOrder(newArray));
+        }
+        Arrays.sort(sorts);
+        for (Sort sort : sorts) {
+            System.out.println(sort);
+        }
     }
 
     // 最普通的冒泡
