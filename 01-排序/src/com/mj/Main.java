@@ -23,7 +23,8 @@ public class Main {
                 new MergeSort(),
                 new QuickSort(),
                 new ShellSort(),
-                new CountingSort());
+                new CountingSort(),
+                new RadixSort());
     }
 
     static void testSorts(Integer[] array, Sort... sorts) {
