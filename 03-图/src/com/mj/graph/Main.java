@@ -13,6 +13,11 @@ public class Main {
             public Integer add(Integer w1, Integer w2) {
                 return w1 + w2;
             }
+
+            @Override
+            public Integer zero() {
+                return 0;
+            }
         });
         graph.addEdge("V1", "V0", 9);
         graph.addEdge("V1", "V2", 3);
