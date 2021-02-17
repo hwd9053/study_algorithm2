@@ -172,6 +172,71 @@ public class ListGraph<V, E> extends Graph<V, E>{
         }
     }
 
+//    @Override
+//    public void bfs(V v) {
+//        Vertex<V, E> beginVertex = vertices.get(v);
+//        if (beginVertex == null) return;
+//
+//        Set<Vertex<V, E>> visitedVertices = new HashSet<>();
+//        Queue<Vertex<V, E>> queue = new LinkedList<>();
+//        queue.offer(beginVertex);
+//        visitedVertices.add(beginVertex);
+//
+//        while (!queue.isEmpty()) {
+//            Vertex<V, E> vertex = queue.poll();
+//            System.out.println(vertex);
+//
+//            for (Edge<V, E> edge : vertex.outEdges) {
+//                if (visitedVertices.contains(edge.to)) continue;
+//                queue.offer(edge.to);
+//                visitedVertices.add(edge.to);
+//            }
+//        }
+//    }
+
+//    @Override
+//    public void dfs(V v) {
+//        Vertex<V, E> beginVertex = vertices.get(v);
+//        if (beginVertex == null) return;
+//        dfs(beginVertex, new HashSet<>());
+//
+//    }
+//
+//    private void dfs(Vertex<V, E> vertex, Set<Vertex<V, E>> visitedVertices) {
+//        System.out.println(vertex.value);
+//        visitedVertices.add(vertex);
+//        for (Edge<V, E> edge : vertex.outEdges) {
+//            if (visitedVertices.contains(edge.to)) continue;
+//            dfs(edge.to, visitedVertices);
+//        }
+//    }
+//
+//    // 迭代版dfs
+//    public void dfs2(V v) {
+//        Vertex<V, E> beginVertex = vertices.get(v);
+//        if (beginVertex == null) return;
+//
+//        Set<Vertex<V, E>> visitedVertices = new HashSet<>();
+//        Stack<Vertex<V, E>> stack = new Stack<>();
+//
+//        stack.push(beginVertex);
+//        System.out.println(beginVertex.value);
+//        visitedVertices.add(beginVertex);
+//
+//        while (!stack.isEmpty()) {
+//            Vertex<V, E> vertex = stack.pop();
+//            for (Edge<V, E> edge : vertex.outEdges) {
+//                if (!visitedVertices.contains(edge.to)) {
+//                    stack.push(vertex);
+//                    stack.push(edge.to);
+//                    System.out.println(edge.to.value);
+//                    visitedVertices.add(edge.to);
+//                    break;
+//                }
+//            }
+//        }
+//    }
+
     // 拓扑排序(不断的找入度为0的vertex)
     @Override
     public List<V> topologicalSort() {
@@ -527,71 +592,6 @@ public class ListGraph<V, E> extends Graph<V, E>{
 
         return edgeInfo;
     }
-
-//    @Override
-//    public void bfs(V v) {
-//        Vertex<V, E> beginVertex = vertices.get(v);
-//        if (beginVertex == null) return;
-//
-//        Set<Vertex<V, E>> visitedVertices = new HashSet<>();
-//        Queue<Vertex<V, E>> queue = new LinkedList<>();
-//        queue.offer(beginVertex);
-//        visitedVertices.add(beginVertex);
-//
-//        while (!queue.isEmpty()) {
-//            Vertex<V, E> vertex = queue.poll();
-//            System.out.println(vertex);
-//
-//            for (Edge<V, E> edge : vertex.outEdges) {
-//                if (visitedVertices.contains(edge.to)) continue;
-//                queue.offer(edge.to);
-//                visitedVertices.add(edge.to);
-//            }
-//        }
-//    }
-
-//    @Override
-//    public void dfs(V v) {
-//        Vertex<V, E> beginVertex = vertices.get(v);
-//        if (beginVertex == null) return;
-//        dfs(beginVertex, new HashSet<>());
-//
-//    }
-//
-//    private void dfs(Vertex<V, E> vertex, Set<Vertex<V, E>> visitedVertices) {
-//        System.out.println(vertex.value);
-//        visitedVertices.add(vertex);
-//        for (Edge<V, E> edge : vertex.outEdges) {
-//            if (visitedVertices.contains(edge.to)) continue;
-//            dfs(edge.to, visitedVertices);
-//        }
-//    }
-//
-//    // 迭代版dfs
-//    public void dfs2(V v) {
-//        Vertex<V, E> beginVertex = vertices.get(v);
-//        if (beginVertex == null) return;
-//
-//        Set<Vertex<V, E>> visitedVertices = new HashSet<>();
-//        Stack<Vertex<V, E>> stack = new Stack<>();
-//
-//        stack.push(beginVertex);
-//        System.out.println(beginVertex.value);
-//        visitedVertices.add(beginVertex);
-//
-//        while (!stack.isEmpty()) {
-//            Vertex<V, E> vertex = stack.pop();
-//            for (Edge<V, E> edge : vertex.outEdges) {
-//                if (!visitedVertices.contains(edge.to)) {
-//                    stack.push(vertex);
-//                    stack.push(edge.to);
-//                    System.out.println(edge.to.value);
-//                    visitedVertices.add(edge.to);
-//                    break;
-//                }
-//            }
-//        }
-//    }
 
     private static class Vertex<V, E> {
         V value;
