@@ -2,6 +2,7 @@ package com.mj.sort;
 
 import com.mj.CountingSort;
 import com.mj.Student;
+import com.mj.sort.cmp.SelectionSort;
 import com.mj.sort.cmp.ShellSort;
 
 import java.text.DecimalFormat;
@@ -63,7 +64,7 @@ public abstract class Sort<E extends Comparable<E>> implements Comparable<Sort<E
         if (this instanceof RadixSort) return true;
         if (this instanceof CountingSort) return true;
         if (this instanceof ShellSort) return false;
-//        if (this instanceof SelectionSort) return false;
+        if (this instanceof SelectionSort) return false;
         Student[] students = new Student[20];
         for (int i = 0; i < students.length; i++) {
             students[i] = new Student(i * 10, 10);

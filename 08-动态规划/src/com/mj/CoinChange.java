@@ -1,5 +1,6 @@
 package com.mj;
 
+// 找零钱
 public class CoinChange {
 
     public static void main(String args[]) {
@@ -12,9 +13,15 @@ public class CoinChange {
         for (int i = 1; i <= n; i++) {
             int min = Integer.MAX_VALUE;
             for (int face : faces) {
-                if (i >= face) min = Math.min(dp[i - face], min);
+                if (i < face || dp[i - face] < 0) continue;
+                if (dp[i - face] >= min) continue;
+                min = dp[i - face];
             }
-            dp[i] = min + 1;
+            if (min == Integer.MAX_VALUE) {
+                dp[i] = -1;
+            } else {
+                dp[i] = min + 1;
+            }
         }
         return dp[n];
     }
