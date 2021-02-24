@@ -3,8 +3,39 @@ package com.mj;
 // Longest Common Subsequence
 public class LCS {
 
-    // dp + 滚动数组(进一步优化，用一维数组)
+    // dp + 滚动数组(一维数组基础上继续优化。挑length小的作为列(j))
     static int lcs(int[] nums1, int[] nums2) {
+        if (nums1 == null || nums1.length == 0) return 0;
+        if (nums2 == null || nums2.length == 0) return 0;
+        int[] cols, rows;
+        if (nums1.length > nums2.length) {
+            cols = nums2;
+            rows = nums1;
+        } else {
+            cols = nums1;
+            rows = nums2;
+        }
+
+        int[] dp = new int[cols.length + 1];
+
+        for (int i = 1; i <= rows.length; i++) {
+            int cur = 0;
+            for (int j = 1; j <= cols.length; j++) {
+                int leftTop = cur;
+                cur = dp[j];
+                if (rows[i - 1] == cols[j - 1]) {
+                    dp[j] = leftTop + 1;
+                } else {
+                    dp[j] = Math.max(dp[j], dp[j - 1]);
+                }
+            }
+        }
+
+        return dp[cols.length];
+    }
+
+    // dp + 滚动数组(进一步优化，用一维数组)
+    static int lcs4(int[] nums1, int[] nums2) {
         if (nums1 == null || nums1.length == 0) return 0;
         if (nums2 == null || nums2.length == 0) return 0;
 
