@@ -5,8 +5,35 @@ import java.util.Locale;
 // longest common substring,dp思路跟LIS很像(以...结尾的最大子...)
 public class LCSubstring {
 
-    // dp + 一维数组优化(考虑长度短的串做列)
+    // dp + 一维数组优化(考虑长度短的串做列,利用从右往左算来更简化代码)
     static int lsc(String str1, String str2) {
+        if (str1 == null || str2 == null) return 0;
+        char[] chars1 = str1.toCharArray();
+        char[] chars2 = str2.toCharArray();
+        if (chars1.length == 0 || chars2.length == 0) return 0;
+        int[] dp = new int[chars2.length + 1];
+        int max = 0;
+        char[] rows = chars1, cols = chars2;
+        if (rows.length < cols.length) {
+            rows = chars2;
+            cols = chars1;
+        }
+
+        for (int row = 1; row <= rows.length; row++) {
+            for (int col = cols.length; col >= 1; col--) {
+                if (rows[row - 1] == cols[col - 1]) {
+                    dp[col] = dp[col - 1] + 1;
+                    max = Math.max(max, dp[col]);
+                } else {
+                    dp[col] = 0; // 滚动一维数组，需要注意不相等的时候，要覆盖原来的值
+                }
+            }
+        }
+        return max;
+    }
+
+    // dp + 一维数组优化(考虑长度短的串做列)
+    static int lsc2(String str1, String str2) {
         if (str1 == null || str2 == null) return 0;
         char[] chars1 = str1.toCharArray();
         char[] chars2 = str2.toCharArray();
@@ -56,6 +83,6 @@ public class LCSubstring {
     }
 
     public static void main(String[] args) {
-        System.out.println(lsc("abcba", "babca"));
+        System.out.println(lsc2("abcba", "babca"));
     }
 }
