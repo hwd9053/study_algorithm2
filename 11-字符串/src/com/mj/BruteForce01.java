@@ -14,7 +14,7 @@ public class BruteForce01 {
         int pi = 0, ti = 0;
         int lenDelta = tlen - plen; // 临界值
         while (pi < plen && ti - pi <= lenDelta) {
-            if (pi < 0 || textChars[ti] == patternChars[pi]) {
+            if (textChars[ti] == patternChars[pi]) {
                 ti++;
                 pi++;
             } else {
